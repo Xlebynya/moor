@@ -22,14 +22,24 @@ const routesMap = {
     knowlage: 'База знаний',
     maps: 'Карты',
     library: 'Библиотека',
-}
+} as const
+
+type RouteKey = keyof typeof routesMap
 
 const displayItems = Object.values(routesMap)
 
 const currentTab = computed({
-    get: () => routesMap[route.name as string] || displayItems[0],
-    set: (displayValue) => {
-        const routeName = Object.keys(routesMap).find((key) => routesMap[key] === displayValue)
+    get: () => {
+        const routeName = route.name as string | symbol
+        if (typeof routeName === 'string' && routeName in routesMap) {
+            return routesMap[routeName as RouteKey] || displayItems[0]
+        }
+        return displayItems[0]
+    },
+    set: (displayValue: string) => {
+        const routeName = Object.keys(routesMap).find(
+            (key) => routesMap[key as RouteKey] === displayValue,
+        )
         if (routeName) {
             router.push({ name: routeName })
         }
