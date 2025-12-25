@@ -86,6 +86,7 @@ onUnmounted(() => {
 .dropdown-item {
     padding: 8px 12px;
     cursor: pointer;
+    background-color: var(--gray-bg);
 
     &:hover {
         background-color: var(--gray-bg--hover);

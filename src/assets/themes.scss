@@ -27,14 +27,14 @@
     --primary-surface-border: var(--primary-5);
 }
 
-// $colors: (
-//     'gray-bg': 'background-color',
-//     'gray-text': 'color',
-//     'primary-text': 'color',
-// );
+$colors: (
+    'gray-bg': 'background-color',
+    'gray-text': 'color',
+    'primary-text': 'color',
+);
 
-// @each $key, $prop in $colors {
-//     .#{$key} {
-//         #{$prop}: var(--#{$key});
-//     }
-// }
+@each $key, $prop in $colors {
+    .#{$key} {
+        #{$prop}: var(--#{$key});
+    }
+}
