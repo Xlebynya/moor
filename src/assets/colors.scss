@@ -1,0 +1,96 @@
+:root {
+    --gray-0: #fff;
+    --gray-1: #e2e1e3;
+    --gray-2: #bab9bd;
+    --gray-3: #949398;
+    --gray-4: #706e75;
+    --gray-5: #4d4c52;
+    --gray-6: #2d2c30;
+    --gray-7: #111113;
+    --gray-f: #000;
+
+    --primary-1: #e3def7;
+    --primary-2: #beb1ed;
+    --primary-3: #9b85e2;
+    --primary-4: #7b57d4;
+    --primary-5: #5833a7;
+    --primary-6: #341c67;
+    --primary-7: #150830;
+
+    --secondary-1: #f5eff1;
+    --secondary-2: #e4d1d8;
+    --secondary-3: #cca4b4;
+    --secondary-4: #b77692;
+    --secondary-5: #89556c;
+    --secondary-6: #5d3848;
+    --secondary-7: #341d27;
+
+    --accent-1: #fef3a1;
+    --accent-2: #dcce40;
+    --accent-3: #b2a732;
+    --accent-4: #8a8125;
+    --accent-5: #645d18;
+    --accent-6: #403b0c;
+    --accent-7: #1f1d03;
+}
+
+$color-palettes: (
+    gray: (
+        0: var(--gray-0),
+        1: var(--gray-1),
+        2: var(--gray-2),
+        3: var(--gray-3),
+        4: var(--gray-4),
+        5: var(--gray-5),
+        6: var(--gray-6),
+        7: var(--gray-7),
+        f: var(--gray-f),
+    ),
+    primary: (
+        1: var(--primary-1),
+        2: var(--primary-2),
+        3: var(--primary-3),
+        4: var(--primary-4),
+        5: var(--primary-5),
+        6: var(--primary-6),
+        7: var(--primary-7),
+    ),
+    secondary: (
+        1: var(--secondary-1),
+        2: var(--secondary-2),
+        3: var(--secondary-3),
+        4: var(--secondary-4),
+        5: var(--secondary-5),
+        6: var(--secondary-6),
+        7: var(--secondary-7),
+    ),
+    accent: (
+        1: var(--accent-1),
+        2: var(--accent-2),
+        3: var(--accent-3),
+        4: var(--accent-4),
+        5: var(--accent-5),
+        6: var(--accent-6),
+        7: var(--accent-7),
+    ),
+);
+
+// text colors '.ty-primary-1'
+@each $palette, $levels in $color-palettes {
+    @each $level, $value in $levels {
+        .ty-#{$palette + ''}-#{$level} {
+            color: $value;
+        }
+    }
+}
+
+// background colors '.primary-1'
+@each $palette, $levels in $color-palettes {
+    .#{$palette + ''} {
+        @each $level, $value in $levels {
+            &-#{$level} {
+                background-color: $value;
+            }
+        }
+    }
+}

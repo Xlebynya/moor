@@ -1,0 +1,23 @@
+$breakpoint-tablet: 768px; // there's one more in base.css
+$breakpoint-mobile: 425px; // there's one more in base.css
+
+@mixin tablet {
+    @media (min-width: $breakpoint-mobile + 1) and (max-width: $breakpoint-tablet) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: $breakpoint-mobile) {
+        @content;
+    }
+}
+
+@mixin tablet-and-mobile {
+    @include mobile {
+        @content;
+    }
+    @include tablet {
+        @content;
+    }
+}

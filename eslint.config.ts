@@ -1,22 +1,26 @@
-import { globalIgnores } from 'eslint/config'
-import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
+import js from '@eslint/js'
+import globals from 'globals'
+import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
-import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+import json from '@eslint/json'
+import css from '@eslint/css'
+import { defineConfig } from 'eslint/config'
 
-// To allow more languages other than `ts` in `.vue` files, uncomment the following lines:
-// import { configureVueProject } from '@vue/eslint-config-typescript'
-// configureVueProject({ scriptLangs: ['ts', 'tsx'] })
-// More info at https://github.com/vuejs/eslint-config-typescript/#advanced-setup
-
-export default defineConfigWithVueTs(
-  {
-    name: 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
-  },
-
-  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
-
-  pluginVue.configs['flat/essential'],
-  vueTsConfigs.recommended,
-  skipFormatting,
-)
+export default defineConfig([
+    {
+        files: ['**/*.{js,mjs,cjs,ts,mts,cts,vue}'],
+        plugins: { js },
+        extends: ['js/recommended'],
+        languageOptions: { globals: globals.node },
+    },
+    tseslint.configs.recommended,
+    pluginVue.configs['flat/essential'],
+    { files: ['**/*.vue'], languageOptions: { parserOptions: { parser: tseslint.parser } } },
+    {
+        files: ['**/*.json'],
+        plugins: { json },
+        language: 'json/json',
+        extends: ['json/recommended'],
+    },
+    { files: ['**/*.css'], plugins: { css }, language: 'css/css', extends: ['css/recommended'] },
+])

@@ -1,0 +1,40 @@
+:root,
+[app-theme='light'] {
+    --gray-text: var(--gray-7);
+    --gray-bg: var(--gray-1);
+    --gray-bg--hover: var(--gray-2);
+
+    --primary-text: var(--primary-6);
+    --primary-bg: var(--primary-5);
+    --on-primary: var(--primary-1);
+    --primary-border: var(--primary-7);
+    --primary-surface: var(--primary-1);
+    --on-primary-surface: var(--primary-6);
+    --primary-surface-border: var(--primary-3);
+}
+
+[app-theme='dark'] {
+    --gray-text: var(--gray-1);
+    --gray-bg: var(--gray-7);
+    --gray-bg--hover: var(--gray-6);
+
+    --primary-text: var(--primary-5);
+    --primary-bg: var(--primary-6);
+    --primary-border: var(--primary-4);
+    --on-primary: var(--primary-1);
+    --primary-surface: var(--primary-7);
+    --on-primary-surface: var(--primary-2);
+    --primary-surface-border: var(--primary-5);
+}
+
+// $colors: (
+//     'gray-bg': 'background-color',
+//     'gray-text': 'color',
+//     'primary-text': 'color',
+// );
+
+// @each $key, $prop in $colors {
+//     .#{$key} {
+//         #{$prop}: var(--#{$key});
+//     }
+// }

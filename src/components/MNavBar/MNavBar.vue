@@ -1,0 +1,26 @@
+<template>
+    <nav class="navbar">
+        <div class="navbar__list">
+            <div class="navbar__tabs">
+                <MNavDropDown v-if="isMobile || isTablet"> Главная </MNavDropDown>
+                <template v-else>
+                    <MNavTabVue to="/">Главная</MNavTabVue>
+                    <MNavTabVue to="/knowlage">База знаний</MNavTabVue>
+                    <MNavTabVue to="/maps">Карты</MNavTabVue>
+                    <MNavTabVue to="/library">Библиотека</MNavTabVue>
+                </template>
+            </div>
+            <div class="navbar__settings"><MNavSettingTab /></div>
+        </div>
+    </nav>
+</template>
+
+<script setup lang="ts">
+import MNavTabVue from './MNavTab.vue'
+import MNavSettingTab from './MNavThemeSwitch.vue'
+import MNavDropDown from './MNavDropDown.vue'
+import { useBreakpoint } from '@/assets/composibles/useBreakpoins'
+const { isMobile, isTablet } = useBreakpoint()
+</script>
+
+<style src="./MNavBar.scss" />
