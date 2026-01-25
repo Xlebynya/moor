@@ -5,13 +5,13 @@ const BREAKPOINTS = {
     tablet: 768,
 }
 
-const currentWidth = ref<number | null>(null)
-
-const updateWidth = () => {
-    currentWidth.value = window.innerWidth
-}
-
 export function useBreakpoint() {
+    const currentWidth = ref(window.innerWidth)
+
+    const updateWidth = () => {
+        currentWidth.value = window.innerWidth
+    }
+
     onMounted(() => {
         updateWidth()
         window.addEventListener('resize', updateWidth)
@@ -21,13 +21,11 @@ export function useBreakpoint() {
         window.removeEventListener('resize', updateWidth)
     })
 
-    const isMobile = computed(() => (currentWidth.value ?? 0) <= BREAKPOINTS.mobile)
+    const isMobile = computed(() => currentWidth.value <= BREAKPOINTS.mobile)
     const isTablet = computed(
-        () =>
-            (currentWidth.value ?? 0) > BREAKPOINTS.mobile &&
-            (currentWidth.value ?? 0) <= BREAKPOINTS.tablet,
+        () => currentWidth.value > BREAKPOINTS.mobile && currentWidth.value <= BREAKPOINTS.tablet,
     )
-    const isDesktop = computed(() => (currentWidth.value ?? 0) > BREAKPOINTS.tablet)
+    const isDesktop = computed(() => currentWidth.value > BREAKPOINTS.tablet)
 
     return {
         isMobile,

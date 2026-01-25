@@ -2,7 +2,7 @@
     <nav class="navbar">
         <div class="navbar__list">
             <div class="navbar__tabs">
-                <MNavDropDown v-if="isMobile || isTablet"> Главная </MNavDropDown>
+                <MNavDropDown v-if="isMobile || isTablet" />
                 <template v-else>
                     <MNavTabVue to="/">Главная</MNavTabVue>
                     <MNavTabVue to="/knowlage">База знаний</MNavTabVue>
@@ -10,7 +10,7 @@
                     <MNavTabVue to="/library">Библиотека</MNavTabVue>
                 </template>
             </div>
-            <div class="navbar__settings"><MNavSettingTab /></div>
+            <div v-if="!isMobile && !isTablet" class="navbar__settings"><MNavSettingTab /></div>
         </div>
     </nav>
 </template>
@@ -23,4 +23,4 @@ import { useBreakpoint } from '@/assets/composibles/useBreakpoins'
 const { isMobile, isTablet } = useBreakpoint()
 </script>
 
-<style src="./MNavBar.scss" />
+<style scoped src="./MNavBar.scss" lang="scss" />

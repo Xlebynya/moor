@@ -1,5 +1,9 @@
 :root,
 [app-theme='light'] {
+    --light-border: var(--gray-2);
+
+    --caption-text: var(--gray-4);
+
     --gray-text: var(--gray-7);
     --gray-bg: var(--gray-1);
     --gray-bg--hover: var(--gray-2);
@@ -14,6 +18,10 @@
 }
 
 [app-theme='dark'] {
+    --light-border: var(--gray-6);
+
+    --caption-text: var(--gray-4);
+
     --gray-text: var(--gray-1);
     --gray-bg: var(--gray-7);
     --gray-bg--hover: var(--gray-6);

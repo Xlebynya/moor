@@ -1,11 +1,14 @@
 <template>
     <MDropdownBtn
         v-model="currentTab"
-        :items="displayItems"
-        class="w-full ty-btn-text"
-        activatorClass="navbar__tab ty-btn-text-l"
+        :items="routesMap"
+        class="w-full ty-btn-text navbar__tab ty-btn-text-l"
         v-bind="$attrs"
+        hide-icon
     >
+        <template #activator>
+            <m-icon icon="menu" size="24" />
+        </template>
     </MDropdownBtn>
 </template>
 
@@ -13,36 +16,46 @@
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import MDropdownBtn from '../MButton/MDropdownBtn.vue'
+import { useBreakpoint } from '@/assets/composibles/useBreakpoins'
+import { DropdownButtonItem } from '../MButton/types'
 
 const route = useRoute()
 const router = useRouter()
 
-const routesMap = {
-    home: 'Главная',
-    knowlage: 'База знаний',
-    maps: 'Карты',
-    library: 'Библиотека',
-} as const
+const { isMobile, isTablet } = useBreakpoint()
 
-type RouteKey = keyof typeof routesMap
+const routesMap = [
+    {
+        text: 'Главная',
+        value: 'home',
+    },
+    {
+        text: 'База знаний',
+        value: 'knowlage',
+    },
+    {
+        text: 'Карты',
+        value: 'maps',
+    },
+    {
+        text: 'Библиотека',
+        value: 'library',
+    },
+] as DropdownButtonItem[]
 
-const displayItems = Object.values(routesMap)
+if (isMobile || isTablet)
+    routesMap.push({
+        text: 'Настройки',
+        value: 'settings',
+        group: 'smallView',
+    })
 
 const currentTab = computed({
-    get: () => {
-        const routeName = route.name as string | symbol
-        if (typeof routeName === 'string' && routeName in routesMap) {
-            return routesMap[routeName as RouteKey] || displayItems[0]
-        }
-        return displayItems[0]
+    get() {
+        return route.name
     },
-    set: (displayValue: string) => {
-        const routeName = Object.keys(routesMap).find(
-            (key) => routesMap[key as RouteKey] === displayValue,
-        )
-        if (routeName) {
-            router.push({ name: routeName })
-        }
+    set(name) {
+        router.push({ name: name })
     },
 })
 </script>

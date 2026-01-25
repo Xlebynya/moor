@@ -29,6 +29,11 @@ const router = createRouter({
             component: GamesLibrary,
         },
         {
+            path: '/settings',
+            name: 'settings',
+            component: () => import('@/views/Settings/SettingsPage.vue'),
+        },
+        {
             path: '/:pathMatch(.*)*',
             name: '404',
             component: NotFound,
