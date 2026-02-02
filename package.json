@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "serve": "vite --port 1111",
     "dev": "vite --open --port 1111",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
@@ -15,7 +16,6 @@
   "dependencies": {
     "@jamescoyle/vue-icon": "^0.1.2",
     "@mdi/js": "^7.4.47",
-    "@tailwindcss/vite": "^4.1.16",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },

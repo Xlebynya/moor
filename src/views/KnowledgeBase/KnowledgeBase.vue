@@ -1,9 +1,21 @@
 <template>
-    <div class="ty-hero-subtitle-1 font-jost flex items-center justify-center">
-        База знаний в разработке
+    <div>
+        <MDialog name="База знаний">
+            <template #left-side>
+                <div style="margin-top: 48px">
+                    <v-for></v-for>
+                </div>
+            </template>
+            <template #right-side></template>
+        </MDialog>
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import MDialog from '@/components/MDialogs/MDialog.vue'
+
+
+
+</script>
 
 <style scoped></style>

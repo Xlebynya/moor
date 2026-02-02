@@ -2,7 +2,8 @@
     <MDropdownBtn
         v-model="currentTab"
         :items="routesMap"
-        class="w-full ty-btn-text navbar__tab ty-btn-text-l"
+        class="navbar__tab ty-btn-text-l"
+        style="width: 100%;"
         v-bind="$attrs"
         hide-icon
     >

@@ -1,5 +1,5 @@
 <template>
-    <div class="ty-hero-subtitle-1 font-jost w-full flex items-center justify-center">
+    <div class="ty-hero-subtitle-1 font-jost" style="display: flex; justify-content: center; align-items: center; width: 100%;">
         Вкладка Карты в разработке
     </div>
 </template>
