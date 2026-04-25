@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import KnowledgeBase from '@/views/KnowledgeBase/KnowledgeBase.vue'
-import NotFound from '@/components/404/NotFound.vue'
+import NotFound from '@/views/404/NotFound.vue'
 import GameMaps from '@/views/Maps/GameMaps.vue'
 import GamesLibrary from '@/views/Library/GamesLibrary.vue'
 
@@ -16,7 +16,23 @@ const router = createRouter({
         {
             path: '/knowlage',
             name: 'knowlage',
+            redirect: '/knowlage/characters',
             component: KnowledgeBase,
+            children: [
+                {
+                    path: ':category',
+                    name: 'knowledge-category',
+                    component: () =>
+                        import('@/views/KnowledgeBase/Components/List.vue'),
+                },
+                {
+                    path: 'characters/:name',
+                    component: () =>
+                        import(
+                            '@/views/KnowledgeBase/Knowlage/Characters/CharacterId.vue'
+                        ),
+                },
+            ],
         },
         {
             path: '/maps',

@@ -1,7 +1,11 @@
 export {
-    mdiProgressWrench as inProgress,
-    mdiBookmarkOutline as bookmark,
+    // unique
+    // menu
     mdiThemeLightDark as themeSwitch,
+    mdiMenu as menu,
+    // common
     mdiMenuDown as triangleDown,
-    mdiMenu as menu
+    mdiMenuLeft as triangleLeft,
+    mdiMenuUp as triangleUp,
+    mdiMenuRight as triangleRight,
 } from '@mdi/js'
