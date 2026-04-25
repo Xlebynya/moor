@@ -28,6 +28,7 @@
             padding: 0 15px;
             height: 100%;
             border-width: 0 1px;
+            border-style: solid;
 
             [app-theme='light'] & {
                 background-color: var(--primary-1);

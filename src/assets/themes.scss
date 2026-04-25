@@ -3,15 +3,17 @@
     --light-border: var(--gray-2);
 
     --caption-text: var(--gray-4);
+    --primary-text: var(--primary-6);
+    --accent-text: var(--accent-4);
 
     --gray-text: var(--gray-7);
     --gray-bg: var(--gray-1);
     --gray-bg--hover: var(--gray-2);
 
-    --primary-text: var(--primary-6);
     --primary-bg: var(--primary-5);
     --on-primary: var(--primary-1);
-    --primary-border: var(--primary-7);
+    --primary-border: var(--primary-5);
+
     --primary-surface: var(--primary-1);
     --on-primary-surface: var(--primary-6);
     --primary-surface-border: var(--primary-3);
@@ -21,18 +23,20 @@
     --light-border: var(--gray-6);
 
     --caption-text: var(--gray-4);
+    --primary-text: var(--primary-5);
+    --accent-text: var(--accent-3);
 
     --gray-text: var(--gray-1);
     --gray-bg: var(--gray-7);
     --gray-bg--hover: var(--gray-6);
 
-    --primary-text: var(--primary-5);
     --primary-bg: var(--primary-6);
-    --primary-border: var(--primary-4);
+    --primary-border: var(--primary-6);
     --on-primary: var(--primary-1);
+
     --primary-surface: var(--primary-7);
     --on-primary-surface: var(--primary-2);
-    --primary-surface-border: var(--primary-5);
+    --primary-surface-border: var(--primary-6);
 }
 
 $colors: (

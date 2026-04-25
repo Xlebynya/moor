@@ -1,45 +1,60 @@
 <template>
-    <div class="dropdown-button" ref="dropdownRef">
+    <div ref="dropdownRef" class="dropdown-button">
         <button
-            @click="toggle"
             class="dropdown-button__activator"
             :class="{ 'dropdown-button__activator--disabled': !modelValue }"
             v-bind="$attrs"
+            @click="toggle"
         >
-            <slot name="activator" :is-open="isOpen" :text="activatorText" :value="modelValue">
+            <slot
+                :is-open="isOpen"
+                name="activator"
+                :text="activatorText"
+                :value="modelValue"
+            >
                 <span>{{ modelValue ? selectedText : activatorText }}</span>
             </slot>
 
-            <slot v-if="!hideIcon" name="icon" :is-open="isOpen">
-                <m-icon icon="triangleDown" size="16" :flip="isOpen ? 'vertical' : null" />
+            <slot v-if="!hideIcon" :is-open="isOpen" name="icon">
+                <m-icon
+                    :flip="isOpen ? 'vertical' : null"
+                    icon="triangleDown"
+                    size="16"
+                />
             </slot>
         </button>
 
-        <Teleport to="body" v-if="isOpen">
+        <Teleport v-if="isOpen" to="body">
             <div class="dropdown-button__menu" :style="menuStyle">
-                <slot name="before-items" :close="close" />
+                <slot :close="close" name="before-items" />
 
-                <template v-for="(group, groupIndex) in groupedItems" :key="groupIndex">
+                <template
+                    v-for="(group, groupIndex) in groupedItems"
+                    :key="groupIndex"
+                >
                     <div
                         v-for="(item, itemIndex) in group.items"
                         :key="`${groupIndex}-${itemIndex}`"
-                        @click="handleItemClick(item)"
                         class="dropdown-button__item"
                         :class="[
                             {
-                                'dropdown-button__item--selected': isSelected(item),
+                                'dropdown-button__item--selected':
+                                    isSelected(item),
                             },
                         ]"
                         :data-value="item.value"
+                        @click="handleItemClick(item)"
                     >
                         <slot
-                            name="item"
-                            :item="item"
+                            :close="close"
                             :index="itemIndex"
                             :is-selected="isSelected(item)"
-                            :close="close"
+                            :item="item"
+                            name="item"
                         >
-                            <span class="dropdown-button__item-text">{{ item.text }}</span>
+                            <span class="dropdown-button__item-text">{{
+                                item.text
+                            }}</span>
                         </slot>
                     </div>
 
@@ -54,7 +69,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, onMounted, onUnmounted, useTemplateRef } from 'vue'
+import {
+    ref,
+    computed,
+    nextTick,
+    onMounted,
+    onUnmounted,
+    useTemplateRef,
+} from 'vue'
 import { DropdownButtonItem } from './types'
 
 interface GroupedItem {
@@ -99,7 +121,7 @@ const menuStyle = ref({})
 const groupedItems = computed<GroupedItem[]>(() => {
     const groupsMap = new Map<string | null, DropdownButtonItem[]>()
 
-    props.items.forEach((item) => {
+    props.items.forEach(item => {
         const groupKey = item.group || ''
 
         if (!groupsMap.has(groupKey)) {
@@ -114,7 +136,7 @@ const groupedItems = computed<GroupedItem[]>(() => {
         orderedGroups = [
             ...props.groupOrder,
             ...Array.from(groupsMap.keys()).filter(
-                (key) => !props.groupOrder.includes(key as string),
+                key => !props.groupOrder.includes(key as string)
             ),
         ]
     } else {
@@ -125,7 +147,7 @@ const groupedItems = computed<GroupedItem[]>(() => {
         })
     }
 
-    return orderedGroups.map((key) => ({
+    return orderedGroups.map(key => ({
         label: key,
         items: groupsMap.get(key) || [],
     }))

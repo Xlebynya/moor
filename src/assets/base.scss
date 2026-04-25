@@ -43,8 +43,13 @@ body {
     justify-self: center;
 }
 
-button:hover {
-    cursor: pointer;
+a {
+    color: var(--accent-text);
+    text-decoration: none;
+
+    &:visited {
+        color: var(--accent-text);
+    }
 }
 
 /* media */
@@ -56,5 +61,11 @@ button:hover {
     .app__main {
         margin-top: 40px;
         height: calc(100vh - 40px);
+    }
+}
+
+@media (max-width: 1440px) {
+    .app__content {
+        padding-inline: 48px;
     }
 }

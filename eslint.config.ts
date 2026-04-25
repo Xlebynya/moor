@@ -3,6 +3,7 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
 import { defineConfig } from 'eslint/config'
+import pluginPrettier from 'eslint-plugin-prettier';
 
 export default defineConfig([
     js.configs.recommended,
@@ -26,8 +27,30 @@ export default defineConfig([
                 sourceType: 'module',
             },
         },
+        plugins: {
+            prettier: pluginPrettier,
+        },      
         rules: {
             'vue/multi-word-component-names': 'off',
+            'vue/no-mutating-props': 'error',
+            // 'vue/component-name-in-template-casing': [
+            //     'error',
+            //     'PascalCase',
+            //     { registeredComponentsOnly: false },
+            // ],
+            'vue/block-order': [
+                'error',
+                { order: ['template', 'script', 'style'] },
+            ],
+            'vue/require-v-for-key': 'error',
+            'vue/no-duplicate-attributes': 'error',
+            'vue/attributes-order': [
+                'error',
+                {
+                    alphabetical: true,
+                },
+            ],
+            'prettier/prettier': ['error', {}, { usePrettierrc: true }]
         },
     },
 ])

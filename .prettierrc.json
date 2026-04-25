@@ -8,6 +8,7 @@
     "bracketSpacing": true,
     "errorOnUnparsableFiles": false,
 
+    "endOfLine": "auto" ,
     "bracketSameLine": false,
     "jsxBracketSameLine": false,
     "arrowParens": "avoid",

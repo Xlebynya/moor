@@ -1,5 +1,4 @@
 import './assets/main.scss'
-import './assets/main.css'
 
 import MIcon from './components/MIcon/MIcon.vue'
 
