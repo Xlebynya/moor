@@ -50,6 +50,7 @@ export default defineConfig([
                     alphabetical: true,
                 },
             ],
+            '@typescript-eslint/no-explicit-any': 'warn',
             'prettier/prettier': ['error', {}, { usePrettierrc: true }]
         },
     },

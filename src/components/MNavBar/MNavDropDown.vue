@@ -1,11 +1,11 @@
 <template>
     <MDropdownBtn
         v-model="currentTab"
-        :items="routesMap"
         class="navbar__tab ty-btn-text-l"
-        style="width: 100%;"
         v-bind="$attrs"
         hide-icon
+        :items="routesMap"
+        style="width: 100%"
     >
         <template #activator>
             <m-icon icon="menu" size="24" />
@@ -32,7 +32,7 @@ const routesMap = [
     },
     {
         text: 'База знаний',
-        value: 'knowlage',
+        value: 'knowledge',
     },
     {
         text: 'Карты',

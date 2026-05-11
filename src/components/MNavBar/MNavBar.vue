@@ -5,12 +5,14 @@
                 <MNavDropDown v-if="isMobile || isTablet" />
                 <template v-else>
                     <MNavTabVue to="/">Главная</MNavTabVue>
-                    <MNavTabVue to="/knowlage">База знаний</MNavTabVue>
+                    <MNavTabVue to="/knowledge">База знаний</MNavTabVue>
                     <MNavTabVue to="/maps">Карты</MNavTabVue>
                     <MNavTabVue to="/library">Библиотека</MNavTabVue>
                 </template>
             </div>
-            <div v-if="!isMobile && !isTablet" class="navbar__settings"><MNavSettingTab /></div>
+            <div v-if="!isMobile && !isTablet" class="navbar__settings">
+                <MNavSettingTab />
+            </div>
         </div>
     </nav>
 </template>

@@ -2,10 +2,10 @@
     <component :is="as" class="card">
         <slot>
             <div class="card__content">
-                <div class="ty-heading-6 center" v-if="props.title">
+                <div v-if="props.title" class="ty-heading-6 center">
                     {{ props.title }}
                 </div>
-                <div class="ty-caption center" v-if="props.subtitle">
+                <div v-if="props.subtitle" class="ty-caption center">
                     {{ props.subtitle }}
                 </div>
             </div>

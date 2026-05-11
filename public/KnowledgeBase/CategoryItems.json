@@ -1,0 +1,91 @@
+{
+    "characters": [
+        {
+            "title": "Дрейн",
+            "route_title": "Дрейн",
+            "subtitle": "Вечная спутница",
+            "player": "Мастер",
+            "species": "Темный эльф"
+        },
+        {
+            "title": "Тауриель",
+            "route_title": "Тауриель",
+            "subtitle": "Воинственная эльфийка",
+            "player": "Лизонька",
+            "species": "Темный эльф"
+        },
+        {
+            "title": "Филин",
+            "route_title": "Филин",
+            "subtitle": "Попаданец из страны фей",
+            "player": "Мастер",
+            "species": "Совлин"
+        },
+        {
+            "title": "Лодвиг",
+            "route_title": "Лодвиг",
+            "player": "Мастер",
+            "species": "Человек"
+        },
+        {
+            "title": "Пигр",
+            "route_title": "Пигр",
+            "player": "Мастер",
+            "species": "Тифлинг"
+        },
+        {
+            "title": "Квиксворд",
+            "route_title": "Квиксворд",
+            "subtitle": "Капитан стражи",
+            "player": "Мастер",
+            "species": "Драконорожденный"
+        },
+        {
+            "title": "Грейдэр",
+            "route_title": "Грейдэр",
+            "player": "Мастер",
+            "species": "Орк"
+        },
+        {
+            "title": "Адриан",
+            "route_title": "Адриан",
+            "player": "Даня",
+            "species": "Человек",
+            "class": "Паладин"
+        },
+        {
+            "title": "Омар",
+            "route_title": "Омар",
+            "player": "Миша",
+            "species": "Полурослик",
+            "class": "Вор"
+        },
+        {
+            "title": "Орфей",
+            "route_title": "Орфей",
+            "player": "Олег",
+            "species": "Эльф",
+            "class": "Бард"
+        },
+        {
+            "title": "Дриан",
+            "route_title": "Дриан",
+            "player": "Мастер",
+            "species": "Человек"
+        },
+        {
+            "title": "Прочие",
+            "route_title": "other",
+            "player": "Мастер"
+        }
+    ],
+    "gods": [
+        {
+            "title": "Ашор",
+            "route_title": "Ашор",
+            "subtitle": "Бог кузнечного дела",
+            "tags": ["Дворф"],
+            "rank": "Младший"
+        }
+    ]
+}

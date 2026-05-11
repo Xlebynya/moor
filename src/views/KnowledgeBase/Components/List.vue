@@ -1,14 +1,14 @@
 <template>
-    <div class="wrapper">
+    <div>
         <div class="filter-row"></div>
         <div class="grid-wrapper">
             <MCard
-                v-for="categoryItem in categoryItems"
-                :key="categoryItem.id"
+                v-for="(categoryItem, id) in categoryItems"
+                :key="id"
                 as="router-link"
                 :subtitle="categoryItem.subtitle"
                 :title="categoryItem.title"
-                :to="$route.path + '/' + categoryItem.title"
+                :to="$route.path + '/' + categoryItem.route_title"
             />
         </div>
     </div>
@@ -16,15 +16,11 @@
 
 <script setup lang="ts">
 import MCard from '@/components/MCard/MCard.vue'
-import { useKnowlageBase } from '@/views/KnowledgeBase/useKnowlageBase'
-
-const { categoryItems } = useKnowlageBase()
+import { useknowledgeBase } from '@/views/KnowledgeBase/useknowledgeBase'
+const { categoryItems } = useknowledgeBase()
 </script>
 
 <style scoped lang="scss">
-.wrapper {
-}
-
 .filter-row {
     height: 48px;
 }

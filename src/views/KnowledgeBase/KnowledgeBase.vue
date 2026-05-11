@@ -24,6 +24,7 @@
 <script setup lang="ts">
 import MDialog from '@/components/MDialogs/MDialog.vue'
 import CategoryList from './Components/Categories.vue'
+
 import { useBreakpoint } from '@/assets/composibles/useBreakpoins'
 const { isDesktop } = useBreakpoint()
 </script>

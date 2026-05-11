@@ -2,7 +2,6 @@
     "name": "Тауриель",
     "subtitle": "Воинственная эльфийка",
     "history": ["История пишется в процессе игры"],
-    "related_characters": [
-        { "title": "Дрейн", "path": "/knowlage/characters/Дрейн" }
-    ]
+    "avatar": null,
+    "tags": ["Темный эльф", "Воин"]
 }

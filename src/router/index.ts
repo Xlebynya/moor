@@ -14,9 +14,8 @@ const router = createRouter({
             component: HomePage,
         },
         {
-            path: '/knowlage',
-            name: 'knowlage',
-            redirect: '/knowlage/characters',
+            path: '/knowledge',
+            name: 'knowledge',
             component: KnowledgeBase,
             children: [
                 {
@@ -26,10 +25,24 @@ const router = createRouter({
                         import('@/views/KnowledgeBase/Components/List.vue'),
                 },
                 {
+                    path: 'characters/other',
+                    component: () =>
+                        import(
+                            '@/views/KnowledgeBase/Knowledge/Characters/OtherCharacters.vue'
+                        ),
+                },
+                {
                     path: 'characters/:name',
                     component: () =>
                         import(
-                            '@/views/KnowledgeBase/Knowlage/Characters/CharacterId.vue'
+                            '@/views/KnowledgeBase/Knowledge/Characters/CharacterId.vue'
+                        ),
+                },
+                {
+                    path: 'gods/:name',
+                    component: () =>
+                        import(
+                            '@/views/KnowledgeBase/Knowledge/Gods/GodId.vue'
                         ),
                 },
             ],

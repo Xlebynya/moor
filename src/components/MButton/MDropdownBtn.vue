@@ -86,7 +86,6 @@ interface GroupedItem {
 
 interface Props {
     items: DropdownButtonItem[]
-    modelValue?: any
     activatorText?: string
     activatorClass?: string
     hideIcon?: boolean

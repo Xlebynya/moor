@@ -1,8 +1,8 @@
 <template>
     <router-link
-        :to="to"
         class="navbar__tab ty-btn-text-l"
         :class="{ 'navbar__tab--active': isActive }"
+        :to="to"
     >
         <slot />
     </router-link>
