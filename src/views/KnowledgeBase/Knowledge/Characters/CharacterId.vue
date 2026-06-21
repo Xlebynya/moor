@@ -71,7 +71,7 @@ const fetchCharacters = async (name: string) => {
         }
         character.value = await response.json()
     } catch (error) {
-        character.value = {}
+        character.value = undefined
         console.error('Ошибка при загрузке JSON:', error)
     }
 }

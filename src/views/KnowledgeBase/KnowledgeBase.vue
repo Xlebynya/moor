@@ -21,7 +21,7 @@ import MDialogMobile from '@/components/MDialogs/MDialogMobile.vue'
 import CategoryList from './Components/Categories.vue'
 
 import { useBreakpoint } from '@/assets/composibles/useBreakpoins'
-import { useknowledgeBase } from './useknowledgeBase'
+import { useknowledgeBase } from './useKnowledgeBase'
 
 const { isDesktop } = useBreakpoint()
 

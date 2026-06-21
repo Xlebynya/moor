@@ -19,14 +19,16 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), { limit: 0 })
 
-const { data, error, loading } = useFetchJson('/ChangeLog/Changelog.json')
+const { data } = useFetchJson('/ChangeLog/Changelog.json')
 
-const changelog = computed(() => {
+type TChangelog = Record<string, string[]> | null
+
+const changelog = computed<TChangelog>(() => {
     if (!data.value) return null
 
     const entries = Object.entries(data.value)
     if (props.limit > 0) {
-        return Object.fromEntries(entries.slice(0, props.limit))
+        return Object.fromEntries(entries.slice(0, props.limit)) as TChangelog
     }
 
     return data.value

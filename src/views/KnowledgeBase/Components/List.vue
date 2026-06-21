@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { useBreakpoint } from '@/assets/composibles/useBreakpoins'
 import MCard from '@/components/MCard/MCard.vue'
-import { useknowledgeBase } from '@/views/KnowledgeBase/useknowledgeBase'
+import { useknowledgeBase } from '@/views/KnowledgeBase/useKnowledgeBase'
 import { MBackBtn } from '@/components'
 const { categoryItems, categoryTitle } = useknowledgeBase()
 const { isDesktop } = useBreakpoint()

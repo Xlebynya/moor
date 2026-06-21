@@ -86,6 +86,7 @@ interface GroupedItem {
 
 interface Props {
     items: DropdownButtonItem[]
+    modelValue?: any
     disabled?: boolean
     activatorText?: string
     activatorClass?: string
