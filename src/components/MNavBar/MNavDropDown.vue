@@ -5,10 +5,10 @@
         v-bind="$attrs"
         hide-icon
         :items="routesMap"
-        style="width: 100%"
+        style="width: 100%; padding: 0"
     >
         <template #activator>
-            <m-icon icon="menu" size="24" />
+            <m-icon icon="menu" size="24" style="margin-inline: 15px" />
         </template>
     </MDropdownBtn>
 </template>
@@ -35,7 +35,7 @@ const routesMap = [
         value: 'knowledge',
     },
     {
-        text: 'Карты',
+        text: 'Локации',
         value: 'maps',
     },
     {

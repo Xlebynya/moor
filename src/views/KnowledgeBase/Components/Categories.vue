@@ -14,21 +14,23 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import MListElement from '@/components/MList/MListElement.vue'
+import { useBreakpoint } from '@/assets/composibles/useBreakpoins'
+import { useknowledgeBase } from '@/views/KnowledgeBase/useKnowledgeBase'
 
 const route = useRoute()
+const { isDesktop } = useBreakpoint()
 
-const categories = [
-    { id: 'characters', title: 'Персонажи', path: '/knowledge/characters' },
-    { id: 'gods', title: 'Боги', path: '/knowledge/gods' },
-    // { id: 'locations', title: 'Локации', path: '/knowledge/locations' },
-]
+const { fetchCategories, categories } = useknowledgeBase()
 
-const activeItem = computed(() =>
-    categories.find(item => route.path.startsWith(item.path))
-)
+const activeItem = computed(() => {
+    if (!isDesktop) return null
+    return categories.value.find(item => route.path.startsWith(item.path))
+})
+
+onMounted(() => fetchCategories())
 </script>
 
 <style scoped lang="scss">
@@ -38,5 +40,9 @@ const activeItem = computed(() =>
     flex-direction: column;
     gap: 8px;
     overflow: hidden;
+
+    @include tablet-and-mobile {
+        margin-top: 16px;
+    }
 }
 </style>

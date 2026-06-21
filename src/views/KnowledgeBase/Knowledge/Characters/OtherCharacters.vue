@@ -13,9 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 import ItemId from '@/views/KnowledgeBase/Components/ItemId.vue'
-import { useRoute } from 'vue-router'
 
 interface IOtherCharacter {
     name: string

@@ -76,16 +76,40 @@
         {
             "title": "Прочие",
             "route_title": "other",
-            "player": "Мастер"
+            "tags": {
+                "player": "Мастер"
+            }
         }
     ],
     "gods": [
         {
+            "title": "Ао",
+            "route_title": "Ао",
+            "subtitle": "Первородное божество",
+            "rank": "Высший",
+            "panteon": "Общий"
+        },
+        {
+            "title": "Девять старших богов",
+            "route_title": "elders-nine",
+            "rank": "Старший",
+            "panteon": "Общий"
+        },
+        {
             "title": "Ашор",
             "route_title": "Ашор",
             "subtitle": "Бог кузнечного дела",
-            "tags": ["Дворф"],
-            "rank": "Младший"
+            "rank": "Младший",
+            "species": "Дворф",
+            "panteon": "Астария"
+        },
+        {
+            "title": "Диайла",
+            "route_title": "Диайла",
+            "subtitle": "Богиня врачевания",
+            "rank": "Полубог",
+            "species": "Эльф",
+            "panteon": "Астария"
         }
     ]
 }

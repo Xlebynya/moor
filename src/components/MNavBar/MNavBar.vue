@@ -6,7 +6,7 @@
                 <template v-else>
                     <MNavTabVue to="/">Главная</MNavTabVue>
                     <MNavTabVue to="/knowledge">База знаний</MNavTabVue>
-                    <MNavTabVue to="/maps">Карты</MNavTabVue>
+                    <MNavTabVue to="/maps">Локации</MNavTabVue>
                     <MNavTabVue to="/library">Библиотека</MNavTabVue>
                 </template>
             </div>

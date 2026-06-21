@@ -20,7 +20,6 @@ const router = createRouter({
             children: [
                 {
                     path: ':category',
-                    name: 'knowledge-category',
                     component: () =>
                         import('@/views/KnowledgeBase/Components/List.vue'),
                 },
@@ -36,6 +35,13 @@ const router = createRouter({
                     component: () =>
                         import(
                             '@/views/KnowledgeBase/Knowledge/Characters/CharacterId.vue'
+                        ),
+                },
+                {
+                    path: 'gods/elders-nine',
+                    component: () =>
+                        import(
+                            '@/views/KnowledgeBase/Knowledge/Gods/EldersNine.vue'
                         ),
                 },
                 {

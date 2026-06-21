@@ -9,12 +9,18 @@
                 Город, в котором оживают истории
             </div>
         </div>
+        <MChangelog :limit="5" />
     </div>
 </template>
+<script lang="ts" setup>
+import MChangelog from '@/components/MChangelog/MСhangelog.vue'
+</script>
 <style scoped lang="scss">
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    gap: 32px;
     align-items: center;
     height: 100%;
 

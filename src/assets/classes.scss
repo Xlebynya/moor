@@ -23,10 +23,23 @@
     display: flex;
 }
 
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+
 .align-center{
     align-items: center;
 }
 
 .justify-center{
     justify-content: center;
+}
+
+.gap-4 {
+    gap: 4px;
+}
+
+.gap-8 {
+    gap: 8px;
 }

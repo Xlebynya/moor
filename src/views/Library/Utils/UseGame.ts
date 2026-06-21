@@ -14,7 +14,7 @@
 //             </div>
 //             <div class="m-1">
 //                 <button @click="reset(fighter, knight)" class="gray-2 p-3 border-1 rounded">
-//                     Восстановить всё
+//                     Восстановить все
 //                 </button>
 //             </div>
 //         </div>
@@ -32,7 +32,7 @@
 //             <div><strong>Ничьи: </strong> {{ draw }}</div>
 //             <div><strong>Winrate: </strong> {{ heroWin / heroLose }}</div>
 //             <button @click="attackMany(10000, fighter, knight)" class="gray-2 p-3 border-1 rounded">
-//                 1000 Боёв
+//                 1000 Боев
 //             </button>
 //         </div>
 //     </div>

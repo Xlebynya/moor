@@ -2,7 +2,7 @@
     <div ref="dropdownRef" class="dropdown-button">
         <button
             class="dropdown-button__activator"
-            :class="{ 'dropdown-button__activator--disabled': !modelValue }"
+            :class="{ 'dropdown-button__activator--disabled': disabled }"
             v-bind="$attrs"
             @click="toggle"
         >
@@ -86,6 +86,7 @@ interface GroupedItem {
 
 interface Props {
     items: DropdownButtonItem[]
+    disabled?: boolean
     activatorText?: string
     activatorClass?: string
     hideIcon?: boolean
@@ -103,6 +104,7 @@ const props = withDefaults(defineProps<Props>(), {
     autoClose: true,
     groupBy: 'group',
     groupOrder: () => [],
+    disabled: false,
 })
 
 const emit = defineEmits<{

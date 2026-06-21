@@ -1,0 +1,8 @@
+[
+    {
+        "id": "characters",
+        "title": "Персонажи",
+        "path": "/knowledge/characters"
+    },
+    { "id": "gods", "title": "Боги", "path": "/knowledge/gods" }
+]
