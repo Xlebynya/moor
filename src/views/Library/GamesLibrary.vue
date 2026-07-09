@@ -1,5 +1,8 @@
 <template>
-    <div class="ty-hero-subtitle-1 font-jost flex items-center justify-center">
+    <div
+        class="ty-hero-subtitle-1 font-jost"
+        style="display: flex; justify-content: center; align-items: center"
+    >
         Вкладка Библиотека в разработке
     </div>
 </template>

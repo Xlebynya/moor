@@ -1,5 +1,5 @@
 <template>
-    <svg-icon type="mdi" :path="i[icon]" :size="size" v-bind="$attrs" />
+    <SvgIcon :path="i[icon]" :size="size" type="mdi" v-bind="$attrs" />
 </template>
 
 <script setup>

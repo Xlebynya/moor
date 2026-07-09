@@ -1,0 +1,27 @@
+{
+    "id": "locations",
+    "title": "Локации",
+    "path": "/knowledge/locations",
+
+    "locations": [
+        {
+            "title": "Земной мир",
+            "route_title": "",
+            "subtitle": "",
+            "size": "Мир"
+        },
+        {
+            "title": "Внешние миры",
+            "route_title": "",
+            "subtitle": " смотри https://dndvault.ru/book-phb-2024/chapter-app-a-multiverse#vneshnie_plani",
+            "size": "Мир"
+        },
+        {
+            "title": "Внутренние миры",
+            "route_title": "",
+            "subtitle": " смотри https://dndvault.ru/book-phb-2024/chapter-app-a-multiverse#vneshnie_plani",
+            "size": "Мир"
+        }
+    ],
+    "Астария": "Страна, где происходят действия, где находится город Моор"
+}

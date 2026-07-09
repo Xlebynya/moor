@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import KnowledgeBase from '@/views/KnowledgeBase/KnowledgeBase.vue'
-import NotFound from '@/components/404/NotFound.vue'
+import NotFound from '@/views/404/NotFound.vue'
 import GameMaps from '@/views/Maps/GameMaps.vue'
 import GamesLibrary from '@/views/Library/GamesLibrary.vue'
 
@@ -14,9 +14,44 @@ const router = createRouter({
             component: HomePage,
         },
         {
-            path: '/knowlage',
-            name: 'knowlage',
+            path: '/knowledge',
+            name: 'knowledge',
             component: KnowledgeBase,
+            children: [
+                {
+                    path: ':category',
+                    component: () =>
+                        import('@/views/KnowledgeBase/Components/List.vue'),
+                },
+                {
+                    path: 'characters/other',
+                    component: () =>
+                        import(
+                            '@/views/KnowledgeBase/Knowledge/Characters/OtherCharacters.vue'
+                        ),
+                },
+                {
+                    path: 'characters/:name',
+                    component: () =>
+                        import(
+                            '@/views/KnowledgeBase/Knowledge/Characters/CharacterId.vue'
+                        ),
+                },
+                {
+                    path: 'gods/elders-nine',
+                    component: () =>
+                        import(
+                            '@/views/KnowledgeBase/Knowledge/Gods/EldersNine.vue'
+                        ),
+                },
+                {
+                    path: 'gods/:name',
+                    component: () =>
+                        import(
+                            '@/views/KnowledgeBase/Knowledge/Gods/GodId.vue'
+                        ),
+                },
+            ],
         },
         {
             path: '/maps',

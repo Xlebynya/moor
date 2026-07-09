@@ -10,9 +10,14 @@
     font-family: 'Jost', sans-serif !important;
 }
 
+.font-medium {
+    font-weight: 500 !important;
+}
+
 // typographic grid
 
-.ty-body-1 {
+.ty-body-1,
+body {
     /* 16px */
     font-size: 1rem;
     /* regular */
@@ -25,32 +30,36 @@
 }
 
 .ty-heading-1 {
-    /* 60px */
-    font-size: 3.75rem;
+    /* 32px */
+    font-size: 2rem;
     /*meidum*/
     font-weight: 500;
-    line-height: 100%;
-    @include mixins.mobile {
-        // 32px
-        font-size: 2rem;
-    }
+    line-height: 1;
 }
 
 .ty-heading-2 {
-    /* 40px */
-    font-size: 2.5rem;
+    /* 30px */
+    font-size: 1.875rem;
     /*medium*/
     font-weight: 500;
-    line-height: 120%;
+    line-height: 1.2;
     @include mixins.mobile {
-        // 28px
-        font-size: 1.75rem;
+        // 24px
+        font-size: 1.5rem;
     }
 }
 
 .ty-heading-3 {
-    /* 30px */
-    font-size: 1.875rem;
+    /* 26px */
+    font-size: 1.625rem;
+    /*medium*/
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.ty-heading-4 {
+    /* 24px */
+    font-size: 1.5rem;
     /*medium*/
     font-weight: 500;
     line-height: 120%;
@@ -60,9 +69,21 @@
     }
 }
 
-.ty-heading-4 {
+.ty-heading-5 {
     /* 20px */
     font-size: 1.25rem;
+    /*medium*/
+    font-weight: 500;
+    line-height: 120%;
+    @include mixins.mobile {
+        // 18px
+        font-size: 1.125rem;
+    }
+}
+
+.ty-heading-6 {
+    /* 18px */
+    font-size: 1.125rem;
     /*medium*/
     font-weight: 500;
     line-height: 120%;
@@ -84,8 +105,8 @@
     text-wrap: nowrap;
 
     @include mixins.mobile {
-        // 96px
-        font-size: 6rem;
+        // 64px
+        font-size: 4rem;
     }
 }
 
@@ -98,21 +119,17 @@
     line-height: 120%;
     letter-spacing: -0.02em;
     @include mixins.mobile {
-        // 24px
-        font-size: 1.5rem;
+        // 32px
+        font-size: 2rem;
     }
 }
 
 .ty-book-title-1 {
-    /* 30px */
-    font-size: 1.875rem;
+    /* 32px */
+    font-size: 2rem;
     /* medium */
     font-weight: 500;
     line-height: 120%;
-    @include mixins.mobile {
-        // 28px
-        font-size: 1.75rem;
-    }
 }
 
 .ty-btn-text-l {
@@ -133,4 +150,22 @@
     line-height: 120%;
     text-wrap: nowrap;
     user-select: none;
+}
+
+.ty-btn-text-sm {
+    /* 16px */
+    font-size: 0.875rem;
+    /* regular */
+    font-weight: 400;
+    line-height: 120%;
+    text-wrap: nowrap;
+    user-select: none;
+}
+
+.ty-caption {
+    /* 14px */
+    font-size: 0.875rem;
+    /* regular */
+    font-weight: 400;
+    line-height: 150%;
 }
