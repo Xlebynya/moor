@@ -1,9 +1,11 @@
 <template>
-    <ItemId v-if="character">
+    <ItemId :loading="loading">
         <template #header>
-            <span class="ty-heading-3">{{ character.name }}</span>
+            <span v-if="character" class="ty-heading-3">{{
+                character.name
+            }}</span>
             <span
-                v-if="character.subtitle"
+                v-if="character?.subtitle"
                 class="ty-heading-5"
                 style="color: var(--caption-text)"
             >
@@ -11,32 +13,34 @@
             </span>
         </template>
         <template #default>
-            <img
-                v-if="character.avatar"
-                :alt="character.name"
-                class="character__img"
-                :src="character.avatar"
-            />
-            <div class="character__main-info">
-                <div v-if="character.history">
-                    <span class="ty-heading-6">История</span>
-                    <p v-for="(p, i) in character.history" :key="i">
-                        {{ p }}
-                    </p>
+            <template v-if="character">
+                <img
+                    v-if="character.avatar"
+                    :alt="character.name"
+                    class="character__img"
+                    :src="character.avatar"
+                />
+                <div class="character__main-info">
+                    <div v-if="character.history">
+                        <span class="ty-heading-6">История</span>
+                        <p v-for="(p, i) in character.history" :key="i">
+                            {{ p }}
+                        </p>
+                    </div>
+                    <div v-if="character.about">
+                        <span class="ty-heading-6">О персонаже</span>
+                        <p v-for="(p, i) in character.about" :key="i">
+                            {{ p }}
+                        </p>
+                    </div>
                 </div>
-                <div v-if="character.about">
-                    <span class="ty-heading-6">О персонаже</span>
-                    <p v-for="(p, i) in character.about" :key="i">
-                        {{ p }}
-                    </p>
-                </div>
-            </div>
+            </template>
         </template>
         <template v-if="hasRelations" #footer>
             <div class="character__footer">
                 Связанные персонажи:
                 <router-link
-                    v-for="(relation, index) in character.related_characters"
+                    v-for="(relation, index) in character?.related_characters"
                     :key="index"
                     :to="relation.path"
                 >
@@ -62,8 +66,10 @@ interface ICharacter {
 }
 const route = useRoute()
 const character = ref<ICharacter>()
+const loading = ref(false)
 
 const fetchCharacters = async (name: string) => {
+    loading.value = true
     try {
         const response = await fetch(`/KnowledgeBase/Characters/${name}.json`)
         if (!response.ok) {
@@ -73,6 +79,8 @@ const fetchCharacters = async (name: string) => {
     } catch (error) {
         character.value = undefined
         console.error('Ошибка при загрузке JSON:', error)
+    } finally {
+        loading.value = false
     }
 }
 

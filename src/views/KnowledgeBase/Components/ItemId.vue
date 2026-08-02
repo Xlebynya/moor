@@ -8,7 +8,8 @@
                 </slot>
             </div>
             <div class="item__main">
-                <slot />
+                <MLoader v-if="loading" />
+                <slot v-else />
             </div>
             <MDivider v-if="$slots.footer" />
             <slot name="footer"></slot>
@@ -18,10 +19,18 @@
 
 <script setup lang="ts">
 import { MBackBtn, MDivider } from '@/components'
+import MLoader from '@/components/MLoader/MLoader.vue'
 
-defineProps({
-    title: { type: String, default: '' },
-})
+withDefaults(
+    defineProps<{
+        title?: string
+        loading?: boolean
+    }>(),
+    {
+        title: '',
+        loading: false,
+    }
+)
 </script>
 
 <style scoped lang="scss">

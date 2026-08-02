@@ -19,8 +19,11 @@ export function useknowledgeBase() {
     const isRoot = computed(() => route.path === '/knowledge');
     const categories = ref<Category[]>([])
     const categoryItems = ref<CategoryItem[]>([])
+    const categoriesLoading = ref(false)
+    const categoryItemsLoading = ref(false)
 
     const fetchCategories = async () => {
+        categoriesLoading.value = true
         try {
             const response = await fetch(
                 `/KnowledgeBase/Categories.json`
@@ -33,9 +36,12 @@ export function useknowledgeBase() {
         } catch (error) {
             categories.value = []
             console.error('Ошибка при загрузке JSON:', error)
+        } finally {
+            categoriesLoading.value = false
         }
     }
     const fetchCategoryItems = async (category: string) => {
+        categoryItemsLoading.value = true
         try {
             const response = await fetch(
                 `/KnowledgeBase/CategoryItems.json`
@@ -48,6 +54,8 @@ export function useknowledgeBase() {
         } catch (error) {
             categoryItems.value = []
             console.error('Ошибка при загрузке JSON:', error)
+        } finally {
+            categoryItemsLoading.value = false
         }
     }
 
@@ -57,9 +65,11 @@ export function useknowledgeBase() {
 
     return {
         categoryItems,
+        categoryItemsLoading,
+        categories,
+        categoriesLoading,
         isRoot,
         categoryTitle,
-        categories,
         fetchCategories
     }
 }

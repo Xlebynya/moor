@@ -5,7 +5,7 @@
             <MDropdownBtn
                 v-model="theme"
                 :items="selectorThemes"
-                @update:modelValue="setTheme($event)"
+                @update:modelValue="setTheme($event as Theme)"
             />
         </div>
     </div>
@@ -14,6 +14,7 @@
 <script setup lang="ts">
 import MDropdownBtn from '@/components/MButton/MDropdownBtn.vue'
 import { DropdownButtonItem } from '@/components/MButton/types'
+import type { Theme } from '@/assets/composibles/useTheme'
 import { useTheme } from '@/assets/composibles/useTheme'
 
 const selectorThemes = [

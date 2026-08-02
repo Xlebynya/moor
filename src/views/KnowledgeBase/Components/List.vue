@@ -9,7 +9,8 @@
             </div>
         </div>
         <div class="filter-row"></div>
-        <div class="grid-wrapper">
+        <MLoader v-if="categoryItemsLoading" :size="32" />
+        <div v-else class="grid-wrapper">
             <MCard
                 v-for="(categoryItem, id) in categoryItems"
                 :key="id"
@@ -25,9 +26,11 @@
 <script setup lang="ts">
 import { useBreakpoint } from '@/assets/composibles/useBreakpoins'
 import MCard from '@/components/MCard/MCard.vue'
+import MLoader from '@/components/MLoader/MLoader.vue'
 import { useknowledgeBase } from '@/views/KnowledgeBase/useKnowledgeBase'
 import { MBackBtn } from '@/components'
-const { categoryItems, categoryTitle } = useknowledgeBase()
+const { categoryItems, categoryItemsLoading, categoryTitle } =
+    useknowledgeBase()
 const { isDesktop } = useBreakpoint()
 </script>
 
