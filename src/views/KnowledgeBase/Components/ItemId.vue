@@ -20,7 +20,7 @@
 import { MBackBtn, MDivider } from '@/components'
 
 defineProps({
-    title: { type: String, defaul: '' },
+    title: { type: String, default: '' },
 })
 </script>
 
