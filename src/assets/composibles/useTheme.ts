@@ -16,7 +16,9 @@ export const getStoredTheme = (): Theme | null => {
 
 const getSystemTheme = (): Theme => {
     if (typeof window !== 'undefined' && window.matchMedia) {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        return window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light'
     }
     return 'light'
 }
@@ -63,7 +65,7 @@ class ThemeStore {
     public subscribe = () => {
         return watch(
             this.theme,
-            (newTheme) => {
+            newTheme => {
                 if (typeof localStorage !== 'undefined') {
                     localStorage.setItem(STORAGE_KEY, newTheme)
                 }
@@ -71,7 +73,7 @@ class ThemeStore {
                     document.documentElement.setAttribute('app-theme', newTheme)
                 }
             },
-            { immediate: true },
+            { immediate: true }
         )
     }
 }

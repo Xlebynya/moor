@@ -5,7 +5,7 @@
             <MDropdownBtn
                 v-model="theme"
                 :items="selectorThemes"
-                @update:modelValue="setTheme($event as Theme)"
+                @update:model-value="setTheme($event as Theme)"
             />
         </div>
     </div>

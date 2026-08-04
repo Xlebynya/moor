@@ -2,20 +2,38 @@ import js from '@eslint/js'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
+import pluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import { defineConfig } from 'eslint/config'
-import pluginPrettier from 'eslint-plugin-prettier';
 
 export default defineConfig([
     js.configs.recommended,
     ...tseslint.configs.recommended,
-    ...pluginVue.configs['flat/essential'],
+    ...pluginVue.configs['flat/recommended'],
     {
         files: ['**/*.{js,mjs,cjs,ts,mts,cts,vue}'],
         languageOptions: {
+            ecmaVersion: 2020,
             globals: {
                 ...globals.node,
                 ...globals.browser,
             },
+        },
+        rules: {
+            'no-unused-vars': 'off',
+            'no-console': ['warn', { allow: ['warn', 'error'] }],
+            'no-debugger': 'warn',
+            'vue/multi-word-component-names': 'off',
+            'vue/block-order': [
+                'error',
+                { order: ['template', 'script', 'style'] },
+            ],
+            'vue/attributes-order': [
+                'error',
+                {
+                    alphabetical: true,
+                },
+            ],
+            '@typescript-eslint/no-explicit-any': 'warn',
         },
     },
     {
@@ -27,31 +45,6 @@ export default defineConfig([
                 sourceType: 'module',
             },
         },
-        plugins: {
-            prettier: pluginPrettier,
-        },      
-        rules: {
-            'vue/multi-word-component-names': 'off',
-            'vue/no-mutating-props': 'error',
-            // 'vue/component-name-in-template-casing': [
-            //     'error',
-            //     'PascalCase',
-            //     { registeredComponentsOnly: false },
-            // ],
-            'vue/block-order': [
-                'error',
-                { order: ['template', 'script', 'style'] },
-            ],
-            'vue/require-v-for-key': 'error',
-            'vue/no-duplicate-attributes': 'error',
-            'vue/attributes-order': [
-                'error',
-                {
-                    alphabetical: true,
-                },
-            ],
-            '@typescript-eslint/no-explicit-any': 'warn',
-            'prettier/prettier': ['error', {}, { usePrettierrc: true }]
-        },
     },
+    pluginPrettierRecommended,
 ])
