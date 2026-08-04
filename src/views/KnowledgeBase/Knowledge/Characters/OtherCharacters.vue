@@ -1,5 +1,5 @@
 <template>
-    <ItemId v-if="characters">
+    <ItemId :loading="loading">
         <template #header>
             <span class="ty-heading-3">Прочие персонажи</span>
         </template>
@@ -21,8 +21,10 @@ interface IOtherCharacter {
     shortDescription?: string[]
 }
 const characters = ref<IOtherCharacter[]>([])
+const loading = ref(false)
 
 const fetchCharacters = async () => {
+    loading.value = true
     try {
         const response = await fetch('/KnowledgeBase/Characters/Прочие.json')
         if (!response.ok) {
@@ -33,6 +35,8 @@ const fetchCharacters = async () => {
     } catch (error) {
         console.error('Ошибка при загрузке JSON:', error)
         characters.value = []
+    } finally {
+        loading.value = false
     }
 }
 

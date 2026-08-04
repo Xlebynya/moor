@@ -23,7 +23,9 @@ export function useBreakpoint() {
 
     const isMobile = computed(() => currentWidth.value <= BREAKPOINTS.mobile)
     const isTablet = computed(
-        () => currentWidth.value > BREAKPOINTS.mobile && currentWidth.value <= BREAKPOINTS.tablet,
+        () =>
+            currentWidth.value > BREAKPOINTS.mobile &&
+            currentWidth.value <= BREAKPOINTS.tablet
     )
     const isDesktop = computed(() => currentWidth.value > BREAKPOINTS.tablet)
 

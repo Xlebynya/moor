@@ -6,11 +6,9 @@
     "printWidth": 80,
     "semi": false,
     "bracketSpacing": true,
-    "errorOnUnparsableFiles": false,
 
-    "endOfLine": "auto" ,
+    "endOfLine": "lf",
     "bracketSameLine": false,
-    "jsxBracketSameLine": false,
     "arrowParens": "avoid",
     "proseWrap": "preserve",
     "htmlWhitespaceSensitivity": "css",

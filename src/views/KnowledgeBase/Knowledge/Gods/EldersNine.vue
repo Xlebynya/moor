@@ -1,5 +1,5 @@
 <template>
-    <ItemId title="Девять старших богов">
+    <ItemId :loading="loading" title="Девять старших богов">
         <div class="flex-column gap-4">
             <div style="margin-bottom: 8px">
                 {{ preamb }}
@@ -33,8 +33,10 @@ interface IElderNine {
 const preamb = ref<string[]>([])
 const gods = ref<IElderNine[]>([])
 const story = ref<string[]>([])
+const loading = ref(false)
 
 const fetchGods = async () => {
+    loading.value = true
     try {
         const response = await fetch('/KnowledgeBase/Gods/Девять старших.json')
         if (!response.ok) {
@@ -47,6 +49,8 @@ const fetchGods = async () => {
     } catch (error) {
         console.error('Ошибка при загрузке JSON:', error)
         gods.value = []
+    } finally {
+        loading.value = false
     }
 }
 

@@ -28,3 +28,11 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Local TODO list
+.TODO
+
+# Env
+.env
+.env.*
+!.env.example

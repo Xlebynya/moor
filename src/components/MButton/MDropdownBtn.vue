@@ -1,245 +1,187 @@
 <template>
-    <div ref="dropdownRef" class="dropdown-button">
+    <div ref="rootEl" class="dropdown" v-bind="$attrs">
         <button
-            class="dropdown-button__activator"
-            :class="{ 'dropdown-button__activator--disabled': disabled }"
-            v-bind="$attrs"
+            class="dropdown__trigger"
+            :class="{ 'dropdown__trigger--custom': $slots.activator }"
+            type="button"
             @click="toggle"
         >
-            <slot
-                :is-open="isOpen"
-                name="activator"
-                :text="activatorText"
-                :value="modelValue"
-            >
-                <span>{{ modelValue ? selectedText : activatorText }}</span>
-            </slot>
-
-            <slot v-if="!hideIcon" :is-open="isOpen" name="icon">
+            <slot name="activator">
+                <span class="dropdown__label">{{ selectedLabel }}</span>
                 <m-icon
-                    :flip="isOpen ? 'vertical' : null"
+                    v-if="!hideIcon"
+                    class="dropdown__chevron"
+                    :class="{ 'dropdown__chevron--open': open }"
                     icon="triangleDown"
-                    size="16"
+                    :size="18"
                 />
             </slot>
         </button>
-
-        <Teleport v-if="isOpen" to="body">
-            <div class="dropdown-button__menu" :style="menuStyle">
-                <slot :close="close" name="before-items" />
-
-                <template
-                    v-for="(group, groupIndex) in groupedItems"
-                    :key="groupIndex"
+        <div v-if="open" class="dropdown__menu">
+            <template v-for="(item, index) in items" :key="index">
+                <div
+                    v-if="showDivider(item, index)"
+                    class="dropdown__divider"
+                />
+                <button
+                    class="dropdown__item"
+                    :class="{
+                        'dropdown__item--active': item.value === modelValue,
+                    }"
+                    type="button"
+                    @click="select(item)"
                 >
-                    <div
-                        v-for="(item, itemIndex) in group.items"
-                        :key="`${groupIndex}-${itemIndex}`"
-                        class="dropdown-button__item"
-                        :class="[
-                            {
-                                'dropdown-button__item--selected':
-                                    isSelected(item),
-                            },
-                        ]"
-                        :data-value="item.value"
-                        @click="handleItemClick(item)"
-                    >
-                        <slot
-                            :close="close"
-                            :index="itemIndex"
-                            :is-selected="isSelected(item)"
-                            :item="item"
-                            name="item"
-                        >
-                            <span class="dropdown-button__item-text">{{
-                                item.text
-                            }}</span>
-                        </slot>
-                    </div>
-
-                    <hr
-                        v-if="groupIndex < groupedItems.length - 1"
-                        class="dropdown-button__divider"
-                    />
-                </template>
-            </div>
-        </Teleport>
+                    {{ item.text }}
+                </button>
+            </template>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import {
-    ref,
-    computed,
-    nextTick,
-    onMounted,
-    onUnmounted,
-    useTemplateRef,
-} from 'vue'
-import { DropdownButtonItem } from './types'
-
-interface GroupedItem {
-    label: string | null
-    items: DropdownButtonItem[]
-}
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import type { DropdownButtonItem } from './types'
 
 interface Props {
+    modelValue: DropdownButtonItem['value']
     items: DropdownButtonItem[]
-    modelValue?: any
-    disabled?: boolean
-    activatorText?: string
-    activatorClass?: string
     hideIcon?: boolean
-    closeOnSelect?: boolean
-    autoClose?: boolean
-    groupBy?: string // Поле для группировки
-    groupOrder?: string[] // Порядок групп
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    items: () => [],
-    activatorText: 'Выберите',
     hideIcon: false,
-    closeOnSelect: true,
-    autoClose: true,
-    groupBy: 'group',
-    groupOrder: () => [],
-    disabled: false,
 })
 
 const emit = defineEmits<{
-    'update:modelValue': [value: any]
-    change: [value: any, item: DropdownButtonItem]
-    open: []
-    close: []
-    'click-outside': []
+    (e: 'update:modelValue', value: DropdownButtonItem['value']): void
 }>()
 
-const dropdownRef = useTemplateRef('dropdownRef')
-const isOpen = ref(false)
-const menuStyle = ref({})
+const rootEl = ref<HTMLElement>()
+const open = ref(false)
 
-const groupedItems = computed<GroupedItem[]>(() => {
-    const groupsMap = new Map<string | null, DropdownButtonItem[]>()
-
-    props.items.forEach(item => {
-        const groupKey = item.group || ''
-
-        if (!groupsMap.has(groupKey)) {
-            groupsMap.set(groupKey, [])
-        }
-        groupsMap.get(groupKey)!.push(item)
-    })
-
-    let orderedGroups: (string | null)[] = []
-
-    if (props.groupOrder.length > 0) {
-        orderedGroups = [
-            ...props.groupOrder,
-            ...Array.from(groupsMap.keys()).filter(
-                key => !props.groupOrder.includes(key as string)
-            ),
-        ]
-    } else {
-        orderedGroups = Array.from(groupsMap.keys()).sort((a, b) => {
-            if (a === null) return 1
-            if (b === null) return -1
-            return String(a).localeCompare(String(b))
-        })
-    }
-
-    return orderedGroups.map(key => ({
-        label: key,
-        items: groupsMap.get(key) || [],
-    }))
+const selectedLabel = computed(() => {
+    const selected = props.items.find(item => item.value === props.modelValue)
+    return selected?.text ?? ''
 })
 
-const selectedText = computed(() => {
-    if (props.modelValue == null) return ''
-
-    for (const item of props.items) {
-        if (item.value === props.modelValue) {
-            return item.text
-        }
-    }
-    return ''
-})
-
-const isSelected = (item: DropdownButtonItem) => {
-    return props.modelValue === item.value
+const showDivider = (item: DropdownButtonItem, index: number) => {
+    if (index === 0) return false
+    return props.items[index - 1].group !== item.group
 }
 
 const toggle = () => {
-    if (isOpen.value) {
-        close()
-    } else {
-        open()
-    }
+    open.value = !open.value
 }
 
-const open = async () => {
-    if (isOpen.value) return
-
-    isOpen.value = true
-    emit('open')
-
-    await nextTick()
-    updateMenuPosition()
-}
-
-const close = () => {
-    if (!isOpen.value) return
-
-    isOpen.value = false
-    emit('close')
-}
-
-const handleItemClick = (item: DropdownButtonItem) => {
+const select = (item: DropdownButtonItem) => {
     emit('update:modelValue', item.value)
-    emit('change', item.value, item)
+    open.value = false
+}
 
-    if (props.closeOnSelect) {
-        close()
+const onDocumentClick = (e: MouseEvent) => {
+    if (!rootEl.value?.contains(e.target as Node)) {
+        open.value = false
     }
 }
 
-const updateMenuPosition = () => {
-    if (!dropdownRef?.value) return
-
-    const rect = dropdownRef.value.getBoundingClientRect()
-
-    menuStyle.value = {
-        position: 'absolute',
-        top: `${rect.bottom + window.scrollY}px`,
-        left: `${rect.left + window.scrollX}px`,
-        minWidth: `${rect.width}px`,
-        zIndex: '600',
-    }
-}
-
-// Обработка клика вне компонента
-const handleClickOutside = (event: Event) => {
-    const target = event.target as HTMLElement
-
-    if (
-        isOpen.value &&
-        props.autoClose &&
-        dropdownRef?.value &&
-        !dropdownRef.value.contains(target)
-    ) {
-        close()
-        emit('click-outside')
+const onKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+        open.value = false
     }
 }
 
 onMounted(() => {
-    document.addEventListener('click', handleClickOutside)
+    document.addEventListener('click', onDocumentClick)
+    document.addEventListener('keydown', onKeyDown)
 })
 
 onUnmounted(() => {
-    document.removeEventListener('click', handleClickOutside)
+    document.removeEventListener('click', onDocumentClick)
+    document.removeEventListener('keydown', onKeyDown)
 })
 </script>
 
-<style scoped lang="scss" src="./MDropdownBtn.scss" />
+<style scoped lang="scss">
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+    &__trigger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        height: 100%;
+        padding: 8px 12px;
+        border: 1px solid var(--primary-surface-border);
+        border-radius: 8px;
+        background-color: var(--primary-surface);
+        color: var(--on-primary-surface);
+
+        &--custom {
+            padding: 0;
+            border: none;
+            border-radius: 0;
+            background: none;
+        }
+    }
+
+    &__label {
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__chevron {
+        transition: transform 0.2s ease;
+        color: var(--caption-text);
+
+        &--open {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__menu {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        z-index: 200;
+        min-width: 100%;
+        padding: 8px 0;
+        border: 1px solid var(--primary-surface-border);
+        border-radius: 8px;
+        background-color: var(--primary-surface);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    &__item {
+        display: block;
+        width: 100%;
+        padding: 8px 12px;
+        text-align: left;
+        color: var(--on-primary-surface);
+
+        &:hover {
+            background-color: var(--primary-bg--hover);
+        }
+
+        &--active {
+            background-color: var(--primary-bg);
+            color: var(--on-primary);
+
+            &:hover {
+                background-color: var(--primary-bg);
+                color: var(--on-primary);
+            }
+        }
+    }
+
+    &__divider {
+        height: 1px;
+        margin-block: 4px;
+        background-color: var(--light-border);
+    }
+}
+</style>

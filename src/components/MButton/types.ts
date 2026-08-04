@@ -1,7 +1,6 @@
 // Элемент выпадающего списка
 export interface DropdownButtonItem {
     text: string
-    value?: any
+    value?: unknown
     group?: string
-    // disabled?: boolean
 }

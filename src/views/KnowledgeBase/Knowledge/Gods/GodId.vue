@@ -1,9 +1,9 @@
 <template>
-    <ItemId v-if="god">
+    <ItemId :loading="loading">
         <template #header>
-            <span class="ty-heading-3">{{ god.name }}</span>
+            <span v-if="god" class="ty-heading-3">{{ god.name }}</span>
             <span
-                v-if="god.subtitle"
+                v-if="god?.subtitle"
                 class="ty-heading-5"
                 style="color: var(--caption-text)"
             >
@@ -11,18 +11,20 @@
             </span>
         </template>
         <template #default>
-            <img
-                v-if="god.avatar"
-                :alt="god.name"
-                class="god__img"
-                :src="god.avatar"
-            />
-            <div v-if="god.about" class="god__main-info">
-                <span class="ty-heading-6">О божестве</span>
-                <p v-for="(p, i) in god.about" :key="i">
-                    {{ p }}
-                </p>
-            </div>
+            <template v-if="god">
+                <img
+                    v-if="god.avatar"
+                    :alt="god.name"
+                    class="god__img"
+                    :src="god.avatar"
+                />
+                <div v-if="god.about" class="god__main-info">
+                    <span class="ty-heading-6">О божестве</span>
+                    <p v-for="(p, i) in god.about" :key="i">
+                        {{ p }}
+                    </p>
+                </div>
+            </template>
         </template>
     </ItemId>
 </template>
@@ -40,8 +42,10 @@ interface IGod {
 }
 const route = useRoute()
 const god = ref<IGod>()
+const loading = ref(false)
 
 const fetchData = async (name: string) => {
+    loading.value = true
     try {
         const response = await fetch(`/KnowledgeBase/Gods/${name}.json`)
         if (!response.ok) {
@@ -51,6 +55,8 @@ const fetchData = async (name: string) => {
     } catch (error) {
         god.value = undefined
         console.error('Ошибка при загрузке JSON:', error)
+    } finally {
+        loading.value = false
     }
 }
 

@@ -1,14 +1,18 @@
 <template>
     <div class="wrapper">
-        <div v-for="(version, num) in changelog" :key="num">
-            <div class="font-medium">{{ num }}</div>
-            <m-text :text="version" />
-        </div>
+        <MLoader v-if="loading" :size="24" />
+        <template v-else>
+            <div v-for="(version, num) in changelog" :key="num">
+                <div class="font-medium">{{ num }}</div>
+                <m-text :text="version" />
+            </div>
+        </template>
     </div>
 </template>
 
 <script setup lang="ts">
 import { useFetchJson } from '@/assets/composibles/useFetchJson.ts'
+import MLoader from '@/components/MLoader/MLoader.vue'
 import MText from '../MText/MText.vue'
 import { computed } from 'vue'
 
@@ -19,7 +23,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), { limit: 0 })
 
-const { data } = useFetchJson('/ChangeLog/Changelog.json')
+const { data, loading } = useFetchJson('/ChangeLog/Changelog.json')
 
 type TChangelog = Record<string, string[]> | null
 
